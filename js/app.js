@@ -9,6 +9,8 @@ $(document).ready(function()
     let lastRoomData = null;
     window.joining = false;
 
+    let gameMode = null;
+
     const words = 
     {
         "pt": 
@@ -60,7 +62,7 @@ $(document).ready(function()
         }
     };
 
-    const i18n = 
+    /*const i18n = 
     {
         'pt': 
         {
@@ -297,7 +299,7 @@ $(document).ready(function()
 
             intruction_verdict_p: "After 3 rounds compare the answers. Analyze who was inconsistent and vote to eliminate the Impostor",
         }
-    };
+    };*/
     
 // ******************************************************** FUNCTIONS ************************************************************
     window.setLanguage = function (lang) 
@@ -309,7 +311,7 @@ $(document).ready(function()
         $('#new-room-lang').val(lang);
         $('#lang_filter').val(lang);
 
-        if(!(lang in i18n))
+        /*if(!(lang in i18n))
         {
             showFloatingAlert("Coming soon!", "warning");
             window.setLanguage('en');
@@ -331,7 +333,7 @@ $(document).ready(function()
                     $(this).html(translation);
                 }
             }
-        });
+        });*/
 
         $('#player-language').val(lang);
     }
@@ -798,7 +800,7 @@ $(document).ready(function()
 
     function listenToRoomList() 
     {
-        const tableBody = $('#rooms-table');
+        const tableBody = $('#gmode-rooms-table');
         const selectedLang = $('#lang_filter').val() || 'all';
         const selectedTheme = $('#theme_filter').val() || 'all';
 
@@ -806,8 +808,8 @@ $(document).ready(function()
         {
             pt: 
             {
-                none: "Nenhuma sala disponível. Crie uma!",
-                filtered: "Nenhuma sala encontrada com esses filtros."
+                none: "Nenhuma partida disponível. Crie uma!",
+                filtered: "Nenhuma partida encontrada com esses filtros."
             },
             en: 
             {
@@ -875,7 +877,7 @@ $(document).ready(function()
 
         if (roomsFound === 0) 
         {
-            tableBody.append(`<p class="text-center text-muted">${msg.filtered}</p>`);
+            tableBody.append(`<p class="text-center text-muted">${msg.none}</p>`);
         }
     }
 
@@ -1331,12 +1333,35 @@ $(document).ready(function()
         modalLeave.show();
     });
 
-    $('#home-btn-play').click(function() 
+    $('.home-btn-play-mode').click(function() 
     {
-        var l = Ladda.create(this);
-        l.start();
+        let mode = $(this);
 
-        window.quickMatch(l);
+        if((mode[0]).id == "home-run-gamemode")
+        {
+            gameMode = (mode[0]).id;
+        }
+        else if ((mode[0]).id == "home-survival-gamemode") 
+        {
+            gameMode = (mode[0]).id;
+        }
+
+        showSection('game-mode');
+
+    });
+
+    $('#game-mode-btn-new-room').click(function()   
+    {
+        if(gameMode === "home-run-gamemode")
+        {
+            const createModal = new bootstrap.Modal(document.getElementById('new-run-room-modal'));
+            createModal.show();
+        }
+        else if (gameMode === "home-survival-gamemode") 
+        {
+            const createModal = new bootstrap.Modal(document.getElementById('new-survival-room-modal'));
+            createModal.show();
+        }
     });
 
     $('#home-btn-rooms').click(function() 
