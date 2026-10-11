@@ -1,0 +1,11 @@
+body, input, button, textarea, select {
+  font-family: Georgia, 'DejaVu Serif', serif;
+}
+
+.bg-app {
+    background-color: #16181D;
+}
+
+.text-warning {
+    color: #F5A524  !important;
+}   

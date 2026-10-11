@@ -298,12 +298,6 @@ $(document).ready(function()
             intruction_verdict_p: "After 3 rounds compare the answers. Analyze who was inconsistent and vote to eliminate the Impostor",
         }
     };
-
-    /*setTimeout(() => 
-    {
-        showSection('home')
-    }, 2000);*/
-
     
 // ******************************************************** FUNCTIONS ************************************************************
     window.setLanguage = function (lang) 
@@ -748,52 +742,6 @@ $(document).ready(function()
             l.stop();
         });
     }
-
-    /*window.joinRoom = function (roomId, name) 
-    {
-        if (name === "") 
-        {
-            name = "Player_" + Math.floor(Math.random() * 999);
-        }
-
-        const tryJoin = (playerNum) => 
-        {
-            const myId = 'p' + playerNum;
-            const playerRef = window.fbRef(window.fbDB, `rooms/${roomId}/players/${myId}`);
-
-            window.fbGet(playerRef).then((snapshot) => 
-            {
-                if (snapshot.exists()) 
-                {
-                    tryJoin(playerNum + 1);
-                } 
-                else 
-                {
-                    window.fbSet(playerRef, 
-                    {
-                        name: name,
-                        isHost: false,
-                        points: 0
-                    }).then(() => 
-                    {
-                        window.myLocalId = myId;
-                        window.myLocalName = name;
-                        window.isHost = false;
-
-                        $('#lobby-room-code').text(roomId);
-                        showSection('lobby');
-                        listenToPlayers(roomId);
-                        listenToStatus(roomId);
-                    }).catch((err) => 
-                    {
-                        tryJoin(playerNum + 1);
-                    });
-                }
-            });
-        };
-
-        tryJoin(2);
-    }*/
 
     window.joinRoom = function (roomId, name) 
     {
@@ -1387,7 +1335,6 @@ $(document).ready(function()
     {
         var l = Ladda.create(this);
         l.start();
-        //$(this).prop('disabled', true);
 
         window.quickMatch(l);
     });
@@ -1576,6 +1523,11 @@ $(document).ready(function()
     $('#home-intruction-btn').click(function () 
     {
         showSection('intruction');
+    });
+
+    $('#splash-btn-enter').click(function () 
+    {
+        showSection('home');
     });
 
 // ******************************************************************* ----- **********************************************************

@@ -7,79 +7,95 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
             crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="custom-css/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" 
             crossorigin="anonymous">
-
     <link rel="stylesheet" href="lib/ladda_button/css/ladda-themeless.min.css">
-    <title>One of Us</title>
+    <title>Wit or Lose</title>
 </head>
 <body>
-    <!--<section id="splash-screen" class="d-flex flex-column justify-content-between align-items-center w-100 bg-black text-white">
-        <div class="splash-logo-container">
-            <img class="splash-logo" src="assets/splash.png">
-        </div>
-        <div class="spinner-border text-warning" role="status">
-            <span class="sr-only">&#8203;</span>
-        </div>
-    </section>-->
-    
-    <section id="home" class="d-flex flex-column justify-content-between align-items-center w-100 bg-success text-white">
-        
-        <button id="home-info-btn" class="btn btn-link text-white position-absolute top-0 start-0 m-3 p-2">
-            <i class="bi bi-info-circle-fill text-warning" style="font-size: 1.8rem;"></i>
-        </button>
+    <section id="splash-screen" class="d-none flex-column justify-content-between align-items-center w-100 bg-app text-white">
+        <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+            <svg id="stage" viewBox="0 0 800 500">
+                <defs>
+                    <radialGradient id="spot" cx="400" cy="230" r="360" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#F5A524" stop-opacity=".16"/><stop offset="1" stop-color="#F5A524" stop-opacity="0"/>
+                    </radialGradient>
+                    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#2A2E37"/><stop offset="1" stop-color="#16181D"/>
+                    </linearGradient>
+                    <filter id="blur"><feGaussianBlur stdDeviation="14"/></filter>
+                </defs>
 
-        <button id="home-intruction-btn" class="btn btn-link text-white position-absolute top-0 end-0 m-3 p-2">
-            <i class="bi bi-question-circle-fill text-warning" style="font-size: 1.8rem;"></i>
-        </button>
+                <g id="all">
+                    <rect width="800" height="500" fill="#16181D"/>
+                    <rect width="800" height="500" fill="url(#spot)"/>
+                    <rect y="300" width="800" height="200" fill="url(#ground)"/>
+                    <rect y="299" width="800" height="1.5" fill="#8A8F9C" opacity=".35"/>
 
-        <div class="logo-container text-center p-3">
-            <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"
-                class="incognito-icon">
-                <path d="M25 40 H75 L70 25 C65 15, 35 15, 30 25 Z" fill="white" />
-                <rect x="20" y="40" width="60" height="6" rx="3" fill="white" />
-                <circle cx="37" cy="55" r="9" fill="white" />
-                <circle cx="63" cy="55" r="9" fill="white" />
-                <rect x="44" y="52" width="12" height="4" rx="2" fill="white" />
-                <circle cx="37" cy="55" r="6" fill="#198754" class="lens-color" />
-                <circle cx="63" cy="55" r="6" fill="#198754" class="lens-color" />
+                    <rect id="glowC" x="105" y="190" width="50" height="68" rx="14" fill="#F5A524" opacity="0" filter="url(#blur)"/>
+
+                    <!-- Win or Lose (11 blocos: letras e espaços) -->
+                    <g id="tile0"><rect class="sh" x="105" y="201" width="50" height="57" rx="8" fill="#D9CBAE"/><rect class="bd" x="105" y="194" width="50" height="57" rx="8" fill="#F2E8D5"/><text x="130" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D">W</text></g>
+                    <g id="tile1"><rect class="sh" x="160" y="201" width="50" height="57" rx="8" fill="#D9CBAE"/><rect class="bd" x="160" y="194" width="50" height="57" rx="8" fill="#F2E8D5"/><text x="185" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D">i</text></g>
+                    <g id="tile2"><rect class="sh" x="215" y="201" width="50" height="57" rx="8" fill="#D9CBAE"/><rect class="bd" x="215" y="194" width="50" height="57" rx="8" fill="#F2E8D5"/><text x="240" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D">n</text></g>
+                    <g id="tile3"><rect class="sh" x="270" y="201" width="50" height="57" rx="8" fill="transparent"/><rect class="bd" x="270" y="194" width="50" height="57" rx="8" fill="transparent"/><text x="295" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D"></text></g>
+                    <g id="tile4"><rect class="sh" x="325" y="201" width="50" height="57" rx="8" fill="#D9CBAE"/><rect class="bd" x="325" y="194" width="50" height="57" rx="8" fill="#F2E8D5"/><text x="350" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D">o</text></g>
+                    <g id="tile5"><rect class="sh" x="380" y="201" width="50" height="57" rx="8" fill="#D9CBAE"/><rect class="bd" x="380" y="194" width="50" height="57" rx="8" fill="#F2E8D5"/><text x="405" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D">r</text></g>
+                    <g id="tile6"><rect class="sh" x="435" y="201" width="50" height="57" rx="8" fill="transparent"/><rect class="bd" x="435" y="194" width="50" height="57" rx="8" fill="transparent"/><text x="460" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D"></text></g>
+                    <g id="tile7"><rect class="sh" x="490" y="201" width="50" height="57" rx="8" fill="#D9CBAE"/><rect class="bd" x="490" y="194" width="50" height="57" rx="8" fill="#F2E8D5"/><text x="515" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D">L</text></g>
+                    <g id="tile8"><rect class="sh" x="545" y="201" width="50" height="57" rx="8" fill="#D9CBAE"/><rect class="bd" x="545" y="194" width="50" height="57" rx="8" fill="#F2E8D5"/><text x="570" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D">o</text></g>
+                    <g id="tile9"><rect class="sh" x="600" y="201" width="50" height="57" rx="8" fill="#D9CBAE"/><rect class="bd" x="600" y="194" width="50" height="57" rx="8" fill="#F2E8D5"/><text x="625" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D">s</text></g>
+                    <g id="tile10"><rect class="sh" x="655" y="201" width="50" height="57" rx="8" fill="#D9CBAE"/><rect class="bd" x="655" y="194" width="50" height="57" rx="8" fill="#F2E8D5"/><text x="680" y="235" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="700" font-size="36" fill="#16181D">e</text></g>
+
+                    <ellipse id="shadow" cx="-100" cy="300" rx="22" ry="5" fill="#16181D" opacity=".35"/>
+                    <g id="parts"></g>
+
+                    <!-- mascote -->
+                    <g id="mascot" transform="translate(-100,300)">
+                        <rect x="-11" y="-14" width="5" height="12" rx="2" fill="#C47F0E"/>
+                        <rect x="6" y="-14" width="5" height="12" rx="2" fill="#C47F0E"/>
+                        <ellipse cx="-8.5" cy="-1.5" rx="7.5" ry="3.6" fill="#C47F0E"/>
+                        <ellipse cx="8.5" cy="-1.5" rx="7.5" ry="3.6" fill="#C47F0E"/>
+                        <rect x="-23" y="-52" width="46" height="42" rx="10" fill="#C47F0E"/>
+                        <rect x="-23" y="-56" width="46" height="42" rx="10" fill="#F5A524"/>
+                        <circle cx="-9" cy="-39" r="7.5" fill="#F2E8D5"/>
+                        <circle cx="9" cy="-39" r="7.5" fill="#F2E8D5"/>
+                        <circle id="pl" cx="-9" cy="-39" r="3.5" fill="#16181D"/>
+                        <circle id="pr" cx="9" cy="-39" r="3.5" fill="#16181D"/>
+                        <rect id="mouth" x="-9" y="-26.5" width="18" height="5" rx="2.5" fill="#16181D"/>
+                    </g>
+
+                    <g id="title" opacity="0">
+                        <text x="400" y="404" text-anchor="middle" font-family="Georgia,'DejaVu Serif',serif" font-weight="0" font-size="20" letter-spacing="2" fill="#F2E8D5">Cada palavra tem seu ponto fraco</text>
+                    </g>
+                    <!--<text id="sub" x="400" y="440" text-anchor="middle" font-family="system-ui,Arial,sans-serif" font-size="13" letter-spacing="6" fill="#8A8F9C" opacity="0">JOGO INTERactivo</text>-->
+                </g>
             </svg>
-
-            <h1 id="home-title" class="display-5 fw-bold text-white mb-0"><span class="text-warning">One </span>of Us</h1>
-            <p data-i18n="subtitle" class="text-white-50 small mt-0 opacity-75">Descubra quem é o impostor</p>
         </div>
 
-        <div class="flex-grow-1 w-100 px-4" style="max-width: 400px;">
-            <div class="mb-4 text-center">
-                <label data-i18n="label_name" class="form-label fw-bold">NOME:</label>
-                <input data-i18n="placeholder_name" id="player-nickname" type="text" class="shadow form-control form-control-lg text-center shadow-sm"
-                placeholder="Digite um nome">
-            </div>
-            
-            <div class="text-center">
-                <label data-i18n="label_lang" class="form-label fw-bold">IDIOMA:</label>
-                <select id="player-language" onchange="setLanguage(this.value)" class="shadow form-select form-select-lg shadow-sm text-center">
-                    <option value="pt">Português</option>
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="w-100 px-5" style="max-width: 400px;">
-            <div class="d-grid gap-2">
-                <button data-i18n="btn_join" type="button" id="home-btn-play" 
-                        class="btn btn-warning btn-lg fw-bold shadow mb-2 ladda-button">
-                    JOGAR
-                </button>
-                <button data-i18n="btn_browse_rooms" type="button" id="home-btn-rooms" class="btn btn-outline-light btn-lg fw-bold shadow">
-                    VER SALAS
+        <div class="w-100 px-5" style="max-width: 300px;">
+           <div class="d-grid gap-2">
+                <button id="splash-btn-enter" type="button" style="opacity: 0; transition: opacity 0.5s ease; pointer-events: none; min-height: 40px; border: 0; border-radius: 28px; background: #F2E8D5; 
+                        color: #16181D; font-weight: 500; font-size: 17px; 
+                        letter-spacing: 1px; cursor: pointer" class="btn btn-warning btn-lg fw-bold shadow mb-2 ladda-button">
+                    Entrar
                 </button>
             </div>
         </div>
     </section>
+    
+    <section id="home" class="d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
 
-    <section id="rooms" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-success text-white">
+        <div class="w-100 p-3 d-flex align-items-center border-bottom border-white border-opacity-10" style="height: 70px;">
+            <h3 data-i18n="" class="fw-bold mb-0 flex-grow-1 text-center text-warning" style="margin-right: 1.5rem;">
+                Modos de Jogo
+            </h3>
+        </div>
+        
+    </section>
+
+    <section id="rooms" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
         <div class="w-100 p-3 d-flex align-items-center border-bottom border-white border-opacity-10" style="height: 70px;">
 
             <button class="btn-back btn text-warning p-0 me-3" data-target="home" style="font-size: 1.5rem; line-height: 1;">
@@ -153,7 +169,7 @@
     
     </section>
 
-    <section id="lobby" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-success text-white">
+    <section id="lobby" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
         <div class="w-100 position-relative pt-3 pb-2 border-bottom border-white border-opacity-10">
             <button id="lobby-back" class="btn text-warning position-absolute start-0 ms-3 p-0"
                 style="font-size: 1.8rem; line-height: 1;">
@@ -190,7 +206,7 @@
         </div>
     </section>
 
-    <section id="game" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-success text-white">
+    <section id="game" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
         <div class="w-100 p-3 d-flex justify-content-between align-items-center bg-black bg-opacity-10 mb-2">
             <div class="text-start">
                 <span class="small opacity-75 d-block text-uppercase" data-i18n="modal_new_room_label_theme" style="font-size: 0.7rem;">Tema</span>
@@ -322,7 +338,7 @@
         </div>
     </section>
 
-    <section id="info" class="d-none flex-column justify-content-between align-items-center w-100 bg-success text-white">
+    <section id="info" class="d-none flex-column justify-content-between align-items-center w-100 bg-app text-white">
 
         <div class="w-100 p-3 d-flex align-items-center border-bottom border-white border-opacity-10" style="height: 70px;">
             <button class="btn-back btn text-warning p-0 me-3" data-target="home" style="font-size: 1.5rem; line-height: 1;">
@@ -372,7 +388,7 @@
 
     </section>
 
-    <section id="intruction" class="d-none flex-column justify-content-between align-items-center w-100 bg-success text-white">
+    <section id="intruction" class="d-none flex-column justify-content-between align-items-center w-100 bg-app text-white">
 
         <div class="w-100 p-3 d-flex align-items-center border-bottom border-white border-opacity-10" style="height: 70px;">
             <button class="btn-back btn text-warning p-0 me-3" data-target="home" style="font-size: 1.5rem; line-height: 1;">
@@ -437,7 +453,7 @@
 
     <div class="modal fade" id="new-room-modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-success text-white border-2">
+            <div class="modal-content bg-app text-white border-2">
                 <div class="modal-header border-0">
                     <h5 data-i18n="modal_new_room_title" class="modal-title fw-bold text-warning">CRIAR NOVA SALA</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -606,5 +622,6 @@
     <script src="lib/ladda_button/js/spin.js" crossorigin="anonymous"></script>
     <script src="lib/ladda_button/js/ladda.js" crossorigin="anonymous"></script>
     <script src="js/app.js"></script>
+    <script src="js/splash.js"></script>
 </body>
 </html>
