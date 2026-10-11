@@ -85,10 +85,15 @@
         else if (t < SPIN_END) {                                             // Lançado pelo bloco: pirueta 360º e cai atravessando tudo
             const p = arc(LAUNCH, SPIN_END, 240, launchY, 240, T + FALL_DIST, 326);
             rot = 360 * easeIO(p); lx = 0; ly = -1;
-            fade = 1 - clamp((y - G) / 150, 0, 1); // desvanece ao atravessar o chão
+            fade = 1 - clamp((y - G) / 150, 0, 1);
+
             const btn = document.getElementById('splash-btn-enter');
             btn.style.opacity = '1';
             btn.style.pointerEvents = 'visible';
+
+            const nickInput = document.getElementById('player-nickname');
+            nickInput.style.opacity = '1';
+            nickInput.style.pointerEvents = 'visible';
         }
         else { x = 240; y = T + FALL_DIST; fade = 0; }
 

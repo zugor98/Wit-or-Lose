@@ -34,6 +34,12 @@ body, input, button, textarea, select {
   letter-spacing: 1px;
 }
 
+.nick-name {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
 .wit-btn-gmode {
   min-height: 40px;
   border: 0;
@@ -49,8 +55,8 @@ body, input, button, textarea, select {
   min-height: 40px;
   border: 0;
   border-radius: 28px;
-  background: #8A8F9C;
-  color: #16181D;
+  background: #252831;
+  color: #F2E8D5;
   font-weight: 500;
   font-size: 17px;
   letter-spacing: 1px;

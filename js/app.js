@@ -10,6 +10,7 @@ $(document).ready(function()
     window.joining = false;
 
     let gameMode = null;
+    let nickname = null;
 
     const words = 
     {
@@ -703,7 +704,7 @@ $(document).ready(function()
         });
     }
 
-    function createRoom(name, visibility, maxPlayers, language, themeDesc, theme, l) 
+    function createRoom(nickname, maxPlayers, language, distance, visibility)
     {
         const roomId = Math.random().toString(36).substring(2, 7).toUpperCase();
         const roomRef = window.fbRef(window.fbDB, 'rooms/' + roomId);
@@ -714,16 +715,13 @@ $(document).ready(function()
             visibility: visibility,
             config: 
             {
-                themeDesc: themeDesc,
-                theme: theme,
                 language: language, 
                 maxPlayers: parseInt(maxPlayers),
-                round: 1,
-                timer: 60
+                distance: distance
             },
             players: 
             { 
-                "p1": { name: name, isHost: true, points: 0 } 
+                "p1": { name: nickname, isHost: true, points: 0 } 
             }
         };
 
@@ -740,8 +738,6 @@ $(document).ready(function()
 
             listenToPlayers(roomId, maxPlayers);
             listenToStatus(roomId);
-
-            l.stop();
         });
     }
 
@@ -1333,6 +1329,20 @@ $(document).ready(function()
         modalLeave.show();
     });
 
+    $('#splash-btn-enter').click(function () 
+    {
+        const nick = $('#player-nickname').val().trim();
+        if (nick == '' || nick == null)
+        {
+            //showFloatingAlert(i18n[currentLang].alert_select_nickname, "warning");
+            showFloatingAlert("Digite um nome", "warning");
+            return;
+        }
+
+        nickname = nick;
+        showSection('home');
+    });
+
     $('.home-btn-play-mode').click(function() 
     {
         let mode = $(this);
@@ -1364,37 +1374,53 @@ $(document).ready(function()
         }
     });
 
+    $('#gmode-lang-switch').change(function() 
+    {
+        const multiLang = $('#gmode-lang-switch').is(':checked');
+        if(multiLang == true) 
+        {
+            $('#new-run-room-lang').prop('disabled', true);
+        }
+        else
+        {
+            $('#new-run-room-lang').prop('disabled', false);
+        }
+    });
+
+    $('#gmode-btn-confirm-run-newRoom').click(function() 
+    {
+        const maxPlayers = $('#new-run-room-max').val();
+        let language = $('#new-run-room-lang').val();
+        const distance = $('#new-run-room-distance').val();
+        const visibility = $('input[name="run-roomVisibility"]:checked').val();
+
+        const multiLang = $('#gmode-lang-switch').is(':checked');
+        if(multiLang == true) 
+        {
+            language = multiLang;
+        }
+
+        //bootstrap.Modal.getInstance(document.getElementById('new-run-room-modal')).hide();
+
+        //createRoom(nickname, maxPlayers, language, distance, visibility);
+    });
+
+    $('#gmode-btn-confirm-survival-newRoom').click(function() 
+    {
+        const maxPlayers = $('#new-survival-room-max').val();
+        const language = $('#new-survival-room-lang').val();
+        const themeDesc = $('#new-survival-room-theme option:selected').text();
+        const visibility = $('input[name="roomVisibility"]:checked').val();
+
+        bootstrap.Modal.getInstance(document.getElementById('new-survival-room-modal')).hide();
+
+        createRoom(name, visibility, maxPlayers, language, themeDesc, theme);
+    });
+
     $('#home-btn-rooms').click(function() 
     {
         listenToRoomList();
         showSection('rooms');
-    });
-
-    $('#rooms-btn-new-room').click(function() 
-    {
-        const createModal = new bootstrap.Modal(document.getElementById('new-room-modal'));
-        createModal.show();
-    });
-
-    $('#room-btn-confirm-newRoom').click(function() 
-    {
-        const theme = $('#new-room-theme').val();
-        if (theme == '' || theme == null)
-        {
-            showFloatingAlert(i18n[currentLang].alert_select_theme, "warning");
-
-            return;
-        }
-
-        const name = $('#player-nickname').val().trim() || generatePlayerName();
-        const maxPlayers = $('#new-room-max').val();
-        const language = $('#new-room-lang').val();
-        const themeDesc = $('#new-room-theme option:selected').text();
-        const visibility = $('input[name="roomVisibility"]:checked').val();
-
-        bootstrap.Modal.getInstance(document.getElementById('new-room-modal')).hide();
-
-        createRoom(name, visibility, maxPlayers, language, themeDesc, theme);
     });
 
     $('#lobby-btn-start').click(async function () 
@@ -1548,11 +1574,6 @@ $(document).ready(function()
     $('#home-intruction-btn').click(function () 
     {
         showSection('intruction');
-    });
-
-    $('#splash-btn-enter').click(function () 
-    {
-        showSection('home');
     });
 
 // ******************************************************************* ----- **********************************************************

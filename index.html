@@ -76,7 +76,14 @@
         </div>
 
         <div class="w-100 px-5" style="max-width: 300px;">
-           <div class="d-grid gap-2">
+            <div class="d-grid gap-2">
+                <div class="mb-4 text-center">
+                    <input data-i18n="placeholder_name" id="player-nickname" type="text" class="field-gmode 
+                    nick-name shadow form-control form-control-lg text-center shadow-sm"
+                    placeholder="Digite um nome">
+                </div>
+            </div>
+            <div class="d-grid gap-2">
                 <button id="splash-btn-enter" type="button" class="wit-btn-splash btn btn-warning btn-lg fw-bold shadow mb-2 ladda-button">
                     Entrar
                 </button>
@@ -135,12 +142,13 @@
                 <div class="info">
                     <span class="tag">Modo</span>
                     <h2>Corrida</h2>
-                    <p>Uma palavra inicial e uma final. Troque uma letra por vez, na sua vez, e seja o primeiro a chegar ao destino
-                    </p>
+                    <p>Todos partem da mesma palavra e jogam ao mesmo tempo. Troque uma letra por vez e seja o primeiro a chegar à palavra final</p>
                     <div class="link"><span>Jogar</span>
-                        <div class="seta"><svg viewBox="0 0 24 24">
+                        <div class="seta">
+                            <svg viewBox="0 0 24 24">
                                 <path d="M4 12h15M13 6l6 6-6 6" />
-                            </svg></div>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,12 +192,14 @@
                 <div class="info">
                     <span class="tag">Modo</span>
                     <h2>Sobrevivência</h2>
-                    <p>Um timer de 30 segundos corre contra você. Não respondeu a tempo? Está eliminado e o resto do time segue no
+                    <p>Um timer corre contra você. Não respondeu a tempo? Está eliminado e o resto do time segue no
                         jogo</p>
                     <div class="link"><span>Jogar</span>
-                        <div class="seta"><svg viewBox="0 0 24 24">
+                        <div class="seta">
+                            <svg viewBox="0 0 24 24">
                                 <path d="M4 12h15M13 6l6 6-6 6" />
-                            </svg></div>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -239,12 +249,17 @@
                 <div class="info">
                     <span class="tag">Modo</span>   
                     <h2>Duelo</h2>
-                    <p>Um contra um, em melhor de cinco rodadas. Quem trocar a letra certa primeiro leva o ponto.</p>
+                    <p>
+                        Um contra um, a cada jogada você troca uma letra e bloqueia outra para o rival.
+                        Quem ficar sem saída perde a rodada
+                    </p>
                     <div class="link"><span>Em breve</span>
-                        <div class="seta"><svg viewBox="0 0 24 24">
+                        <div class="seta">
+                            <svg viewBox="0 0 24 24">
                                 <path
                                     d="M8 10V7a4 4 0 0 1 8 0v3h1.5A1.5 1.5 0 0 1 19 11.5v8a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5v-8A1.5 1.5 0 0 1 6.5 10zm2 0h4V7a2 2 0 0 0-4 0z" />
-                            </svg></div>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -291,80 +306,6 @@
         </div>
     </section>
 
-    <section id="rooms" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
-        <div class="w-100 p-3 d-flex align-items-center border-bottom border-white border-opacity-10" style="height: 70px;">
-
-            <button class="btn-back btn text-warning p-0 me-3" data-target="home" style="font-size: 1.5rem; line-height: 1;">
-                <i class="bi bi-arrow-left-short"></i>
-            </button>
-
-            <h3 data-i18n="room_title" class="fw-bold mb-0 text-uppercase
-                flex-grow-1 text-center text-warning"
-                style="margin-right: 1.5rem;">
-                PartidasPartidas
-            </h3>
-
-            <button id="btn-join-code" class="btn text-warning p-0" style="font-size: 1.5rem; line-height: 1;">
-                <i class="bi bi-search"></i>
-            </button>
-
-        </div>
-
-        <div class="w-100 top text-center">
-            <div class="row">
-                <div class="col-6">
-                    <div class="">
-                        <label data-i18n="room_lang_title" class="form-label fw-bold">Idioma:</label>
-                        <select id="lang_filter" class="shadow form-select form-select-lg shadow-sm">
-                            <option value="all" data-i18n="filter_general">Geral</option>
-                            <option value="pt">Português</option>
-                            <option value="en">English</option>
-                            <option value="es">Español</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="">
-                        <label data-i18n="theme_title" class="form-label fw-bold">Tema:</label>
-                        <select id="theme_filter" class="shadow form-select form-select-lg shadow-sm">
-                            <option value="all" data-i18n="filter_general">Geral</option>
-                            <option value="food" data-i18n="theme_food">Alimentos</option>
-                            <option value="animals" data-i18n="theme_animals">Animais</option>
-                            <option value="anime" data-i18n="theme_animes">Animes</option>
-                            <option value="clash_royale" data-i18n="theme_clash">Clash Royale</option>
-                            <option value="movies" data-i18n="theme_movies">Filmes</option>
-                            <option value="soccer" data-i18n="theme_soccer">Futebol</option>
-                            <option value="games" data-i18n="theme_games">Games</option>
-                            <option value="brands" data-i18n="theme_brands">Marcas</option>
-                            <option value="objects" data-i18n="theme_objects">Objetos</option>
-                            <option value="countries" data-i18n="theme_countries">Países</option>
-                            <option value="characters" data-i18n="theme_characters">Personagens</option>
-                            <option value="series" data-i18n="theme_series">Séries de TV</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="w-100 flex-grow-1 overflow-hidden my-3" style="max-width: 400px;">
-            <div id="rooms-table" class="bg-light rounded-3 text-left fw-bold p-2 shadow-sm">
-                <div id="room-loading" class="text-center my-5 d-none">
-                    <div class="spinner-border text-primary" role="status"></div>
-                    <p data-i18n="loading_rooms" class="mt-2 text-muted">Carregando as partidas...</p>
-                </div>
-            </div>
-        </div>
-    
-        <div class="w-100" style="max-width: 400px;">
-            <div class="d-grid gap-2">
-                <button data-i18n="btn_new_room" type="button" id="rooms-btn-new-room" class="btn btn-warning btn-lg fw-bold shadow">
-                    NOVA SALA
-                </button>
-            </div>
-        </div>
-    
-    </section>
-
     <section id="lobby" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
         <div class="w-100 position-relative pt-3 pb-2 border-bottom border-white border-opacity-10">
             <button id="lobby-back" class="btn text-warning position-absolute start-0 ms-3 p-0"
@@ -373,7 +314,7 @@
             </button>
         
             <div class="text-center">
-                <h2 data-i18n="lobby_title" class="text-warning fw-bold mb-0" style="font-size: 1.4rem;">SALA CRIADA</h2>
+                <h2 data-i18n="lobby_title" class="text-warning fw-bold mb-0" style="font-size: 1.4rem;">Partida Criada</h2>
                 <div data-i18n="lobby_code" class="badge bg-dark p-2 mt-1 shadow-sm">
                     CÓDIGO: <span id="lobby-room-code" class="text-warning"></span>
                 </div>
@@ -392,11 +333,11 @@
             <div class="d-grid gap-2">
                 <button type="button" id="lobby-btn-start" class="btn btn-warning btn-lg fw-bold shadow mb-2"
                         disabled style="display: none;">
-                    COMEÇAR JOGO
+                    Iniciar Partida
                 </button>
                 <button data-i18n="lobby_leave_room" type="button" id="lobby-btn-leave"
                         class="btn btn-outline-light btn-sm fw-bold border-0 opacity-75">
-                    SAIR DA SALA
+                    Sair da Partida
                 </button>
             </div>
         </div>
@@ -651,16 +592,120 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-app text-white border-2">
                 <div class="modal-header border-0">
-                    <h5 data-i18n="modal_new_room_title" class="modal-title fw-bold text-warning">Criar nova Sala</h5>
+                    <h5 data-i18n="modal_new_run_room_title" class="modal-title fw-bold text-warning">Criar nova Partida</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body px-4">
-                    <div class="w-100 text-center">
+                    <div class="w-100">
                         <div class="row">
                             <form id="form-new-room">
                                 <div class="mb-4">
-                                    <label data-i18n="modal_new_room_label_max_player" class="form-label fw-bold small">
-                                        Nr.Jogadores
+                                    <label data-i18n="modal_new_run_room_label_max_player" class="form-label fw-bold small">
+                                        Nr. de Jogadores
+                                    </label>
+                                    <select id="new-run-room-max"
+                                        class="field-gmode shadow form-select form-select-lg shadow-sm">
+                                        <option data-i18n="_2player_label" value="2">2 Jogadores</option>
+                                        <option data-i18n="_3player_label" value="3">3 Jogadores</option>
+                                        <option data-i18n="_4player_label" value="4">4 Jogadores</option>
+                                        <option data-i18n="_5player_label" value="5">5 Jogadores</option>
+                                        <option data-i18n="_6player_label" value="6">6 Jogadores</option>
+                                        <option data-i18n="_7player_label" value="7">7 Jogadores</option>
+                                        <option data-i18n="_8player_label" value="8">8 Jogadores</option>
+                                        <option data-i18n="_9player_label" value="9">9 Jogadores</option>
+                                        <option data-i18n="_10player_label" value="10">10 Jogadores</option>
+                                    </select>
+                                </div>
+    
+                                <div class="row mb-4">
+                                    <div class="col-6">
+                                        <div>
+                                            <label data-i18n="label_lang" class="form-label fw-bold small">Idioma</label>
+                                            <select id="new-run-room-lang"
+                                                class="field-gmode shadow form-select form-select-lg shadow-sm">
+                                                <option value="pt">Português</option>
+                                                <option value="en">English</option>
+                                                <!-- <option value="es">Español</option> -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label data-i18n="label_multi_lang" class="form-label fw-bold small">Multi
+                                            Idioma
+                                        </label>
+                                        <div class="switch align-items-center justify-content-center">
+                                            <input id="gmode-lang-switch" type="checkbox">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-8">
+                                        <label data-i18n="label_timer" class="form-label fw-bold small">Distância</label>
+                                        <select id="new-run-room-distance"
+                                            class="field-gmode shadow form-select form-select-lg shadow-sm">
+                                            <option value="5p">5 Passos</option>
+                                            <option value="10p">10 Passos</option>
+                                            <option value="15p">15 Passos</option>
+                                            <option value="30p">30 Passos</option>
+                                            <option value="50p">50 Passos</option>
+                                            <option value="100p">100 Passos</option>
+                                        </select>
+                                    </div>
+                                </div>
+    
+                                <div class="mb-4">
+                                    <label data-i18n="modal_new_room_label_visib"
+                                        class="form-label fw-bold small d-block">Visibilidade da partida</label>
+                                    <div class="btn-group w-100 shadow-sm" role="group">
+                                        <input type="radio" class="btn-check" name="run-roomVisibility" id="run-vis-public"
+                                            value="public" checked>
+                                        <label data-i18n="public_label"
+                                            class="field-gmode btn btn-outline-warning fw-bold py-2" for="run-vis-public">
+                                            <i class="bi bi-globe2 me-2"></i>Pública
+                                        </label>
+    
+                                        <input type="radio" class="btn-check" name="run-roomVisibility" id="run-vis-private"
+                                            value="private">
+                                        <label data-i18n="private_label"
+                                            class="field-gmode btn btn-outline-warning fw-bold py-2" for="run-vis-private">
+                                            <i class="bi bi-lock-fill me-2"></i>Privada
+                                        </label>
+                                    </div>
+                                    <small data-i18n="modal_new_room_info_visib"
+                                        class="text-center text-white-50 mt-2 d-block" style="font-size: 0.75rem;">
+                                        Partidas privadas não aparecem na lista global.
+                                    </small>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center modal-footer border-0 pb-4">
+                    <button data-i18n="modal_new_room_create" type="button" id="gmode-btn-confirm-run-newRoom"
+                        class="w-100 wit-btn-gmode btn btn-warning btn-lg fw-bold shadow">
+                        Pronto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="new-survival-room-modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-app text-white border-2">
+                <div class="modal-header border-0">
+                    <h5 data-i18n="modal_new_survival_room_title" class="modal-title fw-bold text-warning">Criar nova Partida</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <div class="w-100">
+                        <div class="row">
+                            <form id="form-new-room">
+                                <div class="mb-4">
+                                    <label data-i18n="modal_new_survival_room_label_max_player" class="form-label fw-bold small">
+                                        Nr. de Jogadores
                                     </label>
                                     <select id="new-room-max"
                                         class="field-gmode shadow form-select form-select-lg shadow-sm">
@@ -680,7 +725,7 @@
                                     <div class="col-6">
                                         <div>
                                             <label data-i18n="label_lang" class="form-label fw-bold small">Idioma</label>
-                                            <select id="new-room-lang"
+                                            <select id="new-survival-room-lang"
                                                 class="field-gmode shadow form-select form-select-lg shadow-sm">
                                                 <option value="pt">Português</option>
                                                 <option value="en">English</option>
@@ -693,15 +738,28 @@
                                             <label data-i18n="label_multi_lang" class="form-label fw-bold small">Multi
                                                 Idioma
                                             </label>
-                                            <div class="switch d-flex align-items-center justify-content-center">
+                                            <div class="switch align-items-center justify-content-center">
                                                 <input id="gmode-lang-switch" type="checkbox">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-8">
+                                        <label data-i18n="label_timer" class="form-label fw-bold small">Tempo por turno</label>
+                                        <select id="new-survival-room-timer"
+                                            class="field-gmode shadow form-select form-select-lg shadow-sm">
+                                            <option value="10s">10 Segundos</option>
+                                            <option value="15s">15 Segundos</option>
+                                            <option value="30s">30 Segundos</option>
+                                            <option value="1m">1 Minuto</option>
+                                        </select>
+                                    </div>
+                                </div>
     
                                 <div class="mb-4">
-                                    <label data-i18n="modal_new_room_label_visib"
+                                    <label data-i18n="modal_new_survival_room_label_visib"
                                         class="form-label fw-bold small d-block">Visibilidade da partida</label>
                                     <div class="btn-group w-100 shadow-sm" role="group">
                                         <input type="radio" class="btn-check" name="roomVisibility" id="vis-public"
@@ -718,7 +776,7 @@
                                             <i class="bi bi-lock-fill me-2"></i>Privada
                                         </label>
                                     </div>
-                                    <small data-i18n="modal_new_room_info_visib"
+                                    <small data-i18n="modal_new_survival_room_info_visib"
                                         class="text-center text-white-50 mt-2 d-block" style="font-size: 0.75rem;">
                                         Partidas privadas não aparecem na lista global.
                                     </small>
@@ -729,7 +787,7 @@
                 </div>
                 
                 <div class="text-center modal-footer border-0 pb-4">
-                    <button data-i18n="modal_new_room_create" type="button" id="gmode-btn-confirm-newRoom"
+                    <button data-i18n="modal_new_survival_room_create" type="button" id="gmode-btn-confirm-newRoom"
                         class="wit-btn-gmode btn btn-warning btn-lg w-100 fw-bold shadow">
                         Pronto
                     </button>
