@@ -15,7 +15,7 @@
     <title>Wit or Lose</title>
 </head>
 <body>
-    <section id="splash-screen" class="d-none flex-column justify-content-between align-items-center w-100 bg-app text-white">
+    <section id="splash-screen" class="d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
         <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
             <svg id="stage" viewBox="0 0 800 500">
                 <defs>
@@ -91,7 +91,7 @@
         </div>
     </section>
     
-    <section id="home" class="d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
+    <section id="home" class="d-none flex-column justify-content-between align-items-center w-100 bg-app text-white">
 
         <div class="w-100 p-3 d-flex align-items-center border-bottom border-white border-opacity-10" style="height: 70px;">
             <h3 data-i18n="" class="fw-bold flex-grow-1 text-center text-warning">
@@ -269,7 +269,6 @@
     <section id="game-mode" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
 
         <div class="w-100 p-3 d-flex align-items-center border-bottom border-white border-opacity-10" style="height: 70px;">
-        
             <h3 data-i18n="room_title" class="fw-bold mb-0 flex-grow-1 text-center text-warning">
                 Partidas Criadas
             </h3>

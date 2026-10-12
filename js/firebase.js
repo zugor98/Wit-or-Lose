@@ -21,22 +21,17 @@ import
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBstMuEARHvk9_-_OnlA2cKWdF5Q9uuAbg",
-    authDomain: "poki-695e7.firebaseapp.com",
-    databaseURL: "https://poki-695e7-default-rtdb.firebaseio.com/",
-    projectId: "poki-695e7",
-    storageBucket: "poki-695e7.firebasestorage.app",
-    messagingSenderId: "608641938421",
-    appId: "1:608641938421:web:826e471f0118150943e6bc",
-    measurementId: "G-99RYW75JZX"
+  apiKey: "AIzaSyC2iTQ8KUyDbxM4L8KKoE5D60elaO1-FN4",
+  authDomain: "witorlose.firebaseapp.com",
+  databaseURL: "https://witorlose-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "witorlose",
+  storageBucket: "witorlose.firebasestorage.app",
+  messagingSenderId: "99669576119",
+  appId: "1:99669576119:web:62539b720dc3bc6805c032",
+  measurementId: "G-1QR9L6WR2Z"
 };
 
 const app = initializeApp(firebaseConfig);
-
-const auth = getAuth();
-signInAnonymously(auth)
-    .then(() => { /*console.log("Logado anonimamente! Agora as permissões funcionam.");*/})
-    .catch((error) => { /*console.error("Erro ao logar:", error);*/ });
 
 const db = getDatabase(app);
 

@@ -63,7 +63,7 @@ $(document).ready(function()
         }
     };
 
-    /*const i18n = 
+    const i18n = 
     {
         'pt': 
         {
@@ -300,7 +300,7 @@ $(document).ready(function()
 
             intruction_verdict_p: "After 3 rounds compare the answers. Analyze who was inconsistent and vote to eliminate the Impostor",
         }
-    };*/
+    };
     
 // ******************************************************** FUNCTIONS ************************************************************
     window.setLanguage = function (lang) 
@@ -348,11 +348,16 @@ $(document).ready(function()
         window.fbOnValue(roomsRef, (snapshot) => 
         {
             lastRoomData = snapshot.val();
-            listenToRoomList();
+            listenToRoomList(gameMode);
         });
     }
 
     statusRoomList()
+
+    function generatePlayerId()
+    {
+        return crypto.randomUUID().slice(0, 8);
+    }
 
     function generatePlayerName() 
     {
@@ -497,7 +502,7 @@ $(document).ready(function()
         window.fbOnValue(roomRef, (snapshot) => 
         {
             const roomData = snapshot.val();
-
+            
             if (!roomData) 
             {
                 clearInterval(gameInterval);
@@ -506,13 +511,13 @@ $(document).ready(function()
 
                 window.myLocalId = null;
                 showSection('home');
-                $("#home-btn-play").prop('disabled', false);
+                //$("#home-btn-play").prop('disabled', false);
 
                 window.fbOff(roomRef);
                 return; 
             }
 
-            if (roomData) 
+            if (roomData)
             {
                 const players = roomData.players || {};
                 const maxPlayers = roomData.config.maxPlayers;
@@ -551,19 +556,20 @@ $(document).ready(function()
 
                 listElement.scrollTop(listElement[0].scrollHeight);
 
-                let lobby_waiting_start = "Aguardando o host iniciar...";
+                let lobby_waiting_start = "Aguardando o host iniciar ...";
                 const $btn = $('#lobby-btn-start');
 
-                if (window.myLocalId === "p1") 
+                if (window.isHost) 
                 {
-                    let lobby_btn_start = (currentLang == 'en') ? "START GAME" : "COMEÇAR JOGO";
-                    let lobby_waiting_players = (currentLang == 'en') ? "WAITING FOR PLAYERS" : "AGUARDANDO JOGADORES";
+                    let lobby_btn_start = (currentLang == 'en') ? "Start Game" : "Começar Partida";
+                    let lobby_waiting_players = (currentLang == 'en') ? "Waiting for Players" : "Aguardando Jogadores";
                     
                     if (numPlayers >= 4) 
                     {
                         $btn.prop('disabled', false)
                             .removeClass('btn-secondary')
                             .addClass('btn-warning')
+                            .addClass('text-warning')
                             .text(lobby_btn_start);
                     }
                     else 
@@ -571,6 +577,7 @@ $(document).ready(function()
                         $btn.prop('disabled', true)
                             .removeClass('btn-warning')
                             .addClass('btn-secondary')
+                            .addClass('text-warning')
                             .text(`${lobby_waiting_players} (${numPlayers}/${maxPlayers})`);
                     }
 
@@ -580,11 +587,11 @@ $(document).ready(function()
                 {
                     $btn.hide();
 
-                    if (currentLang == 'en') { lobby_waiting_start = "Waiting for the host to start..."; }
+                    if (currentLang == 'en') { lobby_waiting_start = "Waiting for the host to start ..."; }
 
                     if ($('#waiting-msg').length === 0) 
                     {
-                        $('#player-list').after('<p id="waiting-msg" class="text-center text-muted small mt-2">'
+                        $('#player-list').after('<p id="waiting-msg" class="text-warning text-center text-muted small mt-2">'
                                                 +lobby_waiting_start+
                                                 '</p>');
                     }
@@ -627,7 +634,7 @@ $(document).ready(function()
             {
                 showSection('lobby');              
 
-                hasVoted = false;
+                /*hasVoted = false;
                 myVoteId = null;
 
                 window.processingResults = false;
@@ -635,7 +642,7 @@ $(document).ready(function()
                 currentRound = 1; 
                 
                 $('#col-round-1, #col-round-2, #col-round-3').empty();
-                $('#game-input-tip, #game-btn-send').prop('disabled', false);
+                $('#game-input-tip, #game-btn-send').prop('disabled', false);*/
             }
 
             if (data && data.status === "playing") 
@@ -708,6 +715,8 @@ $(document).ready(function()
     {
         const roomId = Math.random().toString(36).substring(2, 7).toUpperCase();
         const roomRef = window.fbRef(window.fbDB, 'rooms/' + roomId);
+        const playerId = generatePlayerId();
+        const gameModeDesc = gameMode.includes("run") ? "Corrida" : "Sobrevivência";
         
         const data = 
         {
@@ -715,18 +724,20 @@ $(document).ready(function()
             visibility: visibility,
             config: 
             {
+                gameMode: gameMode,
+                gameModeDesc: gameModeDesc,
                 language: language, 
                 maxPlayers: parseInt(maxPlayers),
                 distance: distance
             },
             players: 
             { 
-                "p1": { name: nickname, isHost: true, points: 0 } 
+                [playerId]: { name: nickname, isHost: true, points: 0 } 
             }
         };
 
-        window.myLocalId = "p1";
-        window.myLocalName = name;
+        window.myLocalId = playerId;
+        window.myLocalName = nickname;
         window.isHost = true;
 
         window.fbSet(roomRef, data).then(() => 
@@ -741,64 +752,76 @@ $(document).ready(function()
         });
     }
 
-    window.joinRoom = function (roomId, name) 
+    window.joinRoom = function (roomId, name)
     {
         if (window.joining) return;
         window.joining = true;
 
         if (!name) name = "Player_" + Math.floor(Math.random() * 999);
 
-        let maxPlayers = window.fbRef(window.fbDB, `rooms/${roomId}/maxPlayers`);
+        const myId    = generatePlayerId();
+        const roomRef = window.fbRef(window.fbDB, `rooms/${roomId}`);
+        let failReason = null;
 
-        const tryJoin = (playerNum) => 
+        window.fbTransaction(roomRef, (room) =>
         {
-            if (playerNum > maxPlayers) 
-            { 
-                alert("Sala cheia"); 
-                window.joining = false;
-                return; 
+            if (room === null) return null;
+
+            if (room.status !== "waiting")
+            {
+                failReason = "started";
+                return;
             }
 
-            const myId = 'p' + playerNum;
+            const players = room.players || {};
+
+            if (Object.keys(players).length >= room.config.maxPlayers)
+            {
+                failReason = "full";
+                return;
+            }
+
+            players[myId] = { name: name, isHost: false, points: 0 };
+            room.players = players;
+            return room;
+        })
+        .then((result) =>
+        {
+            if (!result.committed || !result.snapshot.exists())
+            {
+                if (failReason === "full")         showFloatingAlert("Sala cheia","warning");
+                else if (failReason === "started") showFloatingAlert("A partida já começou","warning");
+                else                               showFloatingAlert("Sala não encontrada","warning");
+                return;
+            }
+
             const playerRef = window.fbRef(window.fbDB, `rooms/${roomId}/players/${myId}`);
+            window.fbDisconnect(playerRef).remove();
 
-            window.fbTransaction(playerRef, (current) => 
-            {
-                if (current !== null) return;
-                return { name: name, isHost: false, points: 0 };
-            })
-            .then((result) => 
-            {
-                if (!result.committed) 
-                {
-                    tryJoin(playerNum + 1);
-                    return;
-                }
-                window.fbDisconnect(playerRef).remove();
+            window.myLocalId = myId;
+            window.myLocalName = name;
+            window.isHost = false;
 
-                window.myLocalId = myId;
-                window.myLocalName = name;
-                window.isHost = false;
-                $('#lobby-room-code').text(roomId);
-                showSection('lobby');
-                listenToPlayers(roomId);
-                listenToStatus(roomId);
-            }).catch((err) => 
-            {
-                //console.error(err);
-                alert("Erro ao entrar na sala");
-                window.joining = false;
-            });
-        };
-
-        tryJoin(2);
+            $('#lobby-room-code').text(roomId);
+            showSection('lobby');
+            listenToPlayers(roomId);
+            listenToStatus(roomId);
+        })
+        .catch((err) =>
+        {
+            console.error(err);
+            showFloatingAlert("Erro, tente de novo","danger");
+        })
+        .finally(() =>
+        {
+            window.joining = false;
+        });
     };
 
-    function listenToRoomList() 
+    function listenToRoomList(gameModeFilter) 
     {
         const tableBody = $('#gmode-rooms-table');
         const selectedLang = $('#lang_filter').val() || 'all';
-        const selectedTheme = $('#theme_filter').val() || 'all';
 
         const messages = 
         {
@@ -809,7 +832,7 @@ $(document).ready(function()
             },
             en: 
             {
-                none: "No rooms available. Create one!",
+                none: "No rooms available. Create!",
                 filtered: "No rooms found with these filters."
             }
         };
@@ -834,26 +857,33 @@ $(document).ready(function()
             if (r.visibility !== "public" || r.status !== "waiting") return;
 
             const matchLang = (selectedLang === 'all' || r.config.language === selectedLang);
-            const matchTheme = (selectedTheme === 'all' || r.config.theme === selectedTheme);
+            const matchMode = (r.config.gameMode === gameModeFilter);
 
-            if (matchLang && matchTheme) 
+            console.log(gameModeFilter)
+            console.log(r.config.gameMode)
+            console.log(matchLang)
+            console.log(matchMode)
+
+
+            if (matchLang && matchMode) 
             {
                 roomsFound++;
                 const numPlayers = Object.keys(r.players).length;
                 const maxPlayers = r.config.maxPlayers;
-                const theme = r.config.theme;
 
-                const themeDesc = i18n[currentLang][`theme_${theme}`] || r.config.themeDesc;
+                const gameModeDesc = i18n[currentLang][`theme_${gameModeDesc}`] || r.config.gameModeDesc;
                 const isFull = numPlayers >= maxPlayers;
 
                 tableBody.append(`
                     <button
-                        ${isFull ? '' : `onclick="joinRoom('${id}', $('#player-nickname').val())"`}
-                        class="d-flex justify-content-between align-items-center w-100 text-start p-3 mb-2 bg-white rounded border text-decoration-none text-dark room-item shadow-sm">
+                        ${isFull ? '' : `onclick="joinRoom('${id}', nickname)"`}
+                        class="d-flex justify-content-between align-items-center w-100 text-start
+                               p-3 mb-2 bg-white rounded border 
+                               text-decoration-none text-dark room-item shadow-sm">
                         
                         <div class="d-flex flex-column">
                             <h5 class="mb-0 fw-bold text-uppercase" style="letter-spacing: 1px;">
-                                ${themeDesc}
+                                ${gameModeDesc}
                             </h5>
                             <small class="text-muted">Código: ${id} | ${r.config.language.toUpperCase()}</small>
                         </div>
@@ -1400,9 +1430,9 @@ $(document).ready(function()
             language = multiLang;
         }
 
-        //bootstrap.Modal.getInstance(document.getElementById('new-run-room-modal')).hide();
+        bootstrap.Modal.getInstance(document.getElementById('new-run-room-modal')).hide();
 
-        //createRoom(nickname, maxPlayers, language, distance, visibility);
+        createRoom(nickname, maxPlayers, language, distance, visibility);
     });
 
     $('#gmode-btn-confirm-survival-newRoom').click(function() 
