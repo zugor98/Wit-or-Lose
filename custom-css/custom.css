@@ -13,7 +13,12 @@ body, input, button, textarea, select {
 
 .text-warning {
     color: #F5A524 !important;
-}   
+}
+
+
+.text-wit {
+    color: #16181D;
+}
 
 .my-x {
     margin-top: 10px !important;
@@ -137,3 +142,8 @@ body, input, button, textarea, select {
 }
 
 /********************************** SWITCH */
+
+.bg-room-leave {
+  background-color: #16181D;
+  color: #F5A524;
+}

@@ -330,7 +330,7 @@
 
         <div class="w-100 px-5 pb-4" style="max-width: 400px;">
             <div class="d-grid gap-2">
-                <button type="button" id="lobby-btn-start" class="btn btn-warning btn-lg fw-bold shadow mb-2"
+                <button type="button" id="lobby-btn-start" class="btn btn-warning btn-lg text-wit fw-bold shadow mb-2"
                         disabled style="display: none;">
                     Iniciar Partida
                 </button>
@@ -797,19 +797,19 @@
 
     <div class="modal fade" id="room-leave-modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-sm px-4">
-            <div class="modal-content bg-dark text-white border-warning border-2 shadow-lg">
+            <div class="modal-content bg-room-leave border-warning border-2 shadow-lg">
                 <div class="modal-body text-center p-4">
-                    <h5 data-i18n="modal_leave_room_title" class="fw-bold mb-3">SAIR DA SALA?</h5>
-                    <p data-i18n="modal_leave_room_subtitle" class="small opacity-75">Se saíres agora, perderás o teu progresso nesta partida.</p>
+                    <h5 data-i18n="modal_leave_room_title" class="fw-bold mb-3">Sair da Sala?</h5>
+                    <p data-i18n="modal_leave_room_subtitle" class="text-white">Se saíres agora, perderás o teu progresso nesta partida.</p>
     
                     <div class="d-grid gap-2 mt-4">
+                        <button data-i18n="modal_leave_room_btn_cancel" 
+                                type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
                         <button data-i18n="modal_leave_room_btn_confirm" 
                                 type="button" id="lobby-btn-leave-confirm" class="btn btn-danger fw-bold shadow-sm">
-                            SIM, SAIR
-                        </button>
-                        <button data-i18n="modal_leave_room_btn_cancel" 
-                                type="button" class="btn btn-outline-light fw-bold" data-bs-dismiss="modal">
-                            CANCELAR
+                            Sim, Sair
                         </button>
                     </div>
                 </div>

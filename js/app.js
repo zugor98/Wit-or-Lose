@@ -143,7 +143,7 @@ $(document).ready(function()
             result_btn_play: "JOGAR NOVAMENTE",
             result_info_play: '<div class="spinner-border spinner-border-sm me-2" role="status"></div>' + 
                                 "Aguardando o Host reiniciar a sala...",
-            alert_host_closed: "O host encerrou a partida ou a sala foi fechada.",
+            alert_host_closed: "A sala foi fechada.",
             alert_end_clues: "Fim das pistas! Hora de votar no Impostor.",
             alert_room_not_found: "Essa sala não existe! Verifique o código.",
             alert_game_started: "Jogo iniciado com sucesso!",
@@ -183,6 +183,8 @@ $(document).ready(function()
 
             intruction_verdict_p: "Após 3 rodadas compare as respostas. " +
                                 " Analise quem foi inconsistente e vote para eliminar o Impostor",
+
+            gameModeDesc: "MODO DE JOGO"
         },
 
         'en': 
@@ -262,7 +264,7 @@ $(document).ready(function()
             result_btn_play: "PLAY AGAIN",
             result_info_play: '<div class="spinner-border spinner-border-sm me-2" role="status"></div>' + 
                                 "Waiting for Host to restart the room...",
-            alert_host_closed: "The host ended the match or the room was closed.",
+            alert_host_closed: "The room was closed.",
             alert_end_clues: "No more clues! Time to vote for the Impostor.",
             alert_room_not_found: "This room doesn't exist! Check the code.",
             alert_game_started: "Game started successfully!",
@@ -299,6 +301,7 @@ $(document).ready(function()
                                "Use the 'Time-Saver' button to jump straight to the voting phase",
 
             intruction_verdict_p: "After 3 rounds compare the answers. Analyze who was inconsistent and vote to eliminate the Impostor",
+            gameModeDesc: "GAME MODE"
         }
     };
     
@@ -348,7 +351,7 @@ $(document).ready(function()
         window.fbOnValue(roomsRef, (snapshot) => 
         {
             lastRoomData = snapshot.val();
-            listenToRoomList(gameMode);
+            listenToRoomList();
         });
     }
 
@@ -564,7 +567,7 @@ $(document).ready(function()
                     let lobby_btn_start = (currentLang == 'en') ? "Start Game" : "Começar Partida";
                     let lobby_waiting_players = (currentLang == 'en') ? "Waiting for Players" : "Aguardando Jogadores";
                     
-                    if (numPlayers >= 4) 
+                    if (numPlayers >= maxPlayers) 
                     {
                         $btn.prop('disabled', false)
                             .removeClass('btn-secondary')
@@ -716,8 +719,9 @@ $(document).ready(function()
         const roomId = Math.random().toString(36).substring(2, 7).toUpperCase();
         const roomRef = window.fbRef(window.fbDB, 'rooms/' + roomId);
         const playerId = generatePlayerId();
+
         const gameModeDesc = gameMode.includes("run") ? "Corrida" : "Sobrevivência";
-        
+     
         const data = 
         {
             status: "waiting",
@@ -778,6 +782,7 @@ $(document).ready(function()
             if (Object.keys(players).length >= room.config.maxPlayers)
             {
                 failReason = "full";
+                showFloatingAlert("Sala cheia","warning");
                 return;
             }
 
@@ -818,7 +823,7 @@ $(document).ready(function()
         });
     };
 
-    function listenToRoomList(gameModeFilter) 
+    function listenToRoomList() 
     {
         const tableBody = $('#gmode-rooms-table');
         const selectedLang = $('#lang_filter').val() || 'all';
@@ -857,13 +862,7 @@ $(document).ready(function()
             if (r.visibility !== "public" || r.status !== "waiting") return;
 
             const matchLang = (selectedLang === 'all' || r.config.language === selectedLang);
-            const matchMode = (r.config.gameMode === gameModeFilter);
-
-            console.log(gameModeFilter)
-            console.log(r.config.gameMode)
-            console.log(matchLang)
-            console.log(matchMode)
-
+            const matchMode = (r.config.gameMode === gameMode);
 
             if (matchLang && matchMode) 
             {
@@ -871,12 +870,13 @@ $(document).ready(function()
                 const numPlayers = Object.keys(r.players).length;
                 const maxPlayers = r.config.maxPlayers;
 
-                const gameModeDesc = i18n[currentLang][`theme_${gameModeDesc}`] || r.config.gameModeDesc;
+                //const gameModeDesc = i18n[currentLang][`theme_${gameModeDesc}`] || r.config.gameModeDesc;
+                const gameModeDesc = r.config.gameModeDesc;
                 const isFull = numPlayers >= maxPlayers;
 
                 tableBody.append(`
                     <button
-                        ${isFull ? '' : `onclick="joinRoom('${id}', nickname)"`}
+                        ${isFull ? '' : `onclick="joinRoom('${id}', '${nickname}')"`}
                         class="d-flex justify-content-between align-items-center w-100 text-start
                                p-3 mb-2 bg-white rounded border 
                                text-decoration-none text-dark room-item shadow-sm">
@@ -990,9 +990,6 @@ $(document).ready(function()
             if (!roomData || !roomData.players) return;
 
             const playersIds = Object.keys(roomData.players);
-            const theme = roomData.config.theme;
-
-            const fakeId = playersIds[Math.floor(Math.random() * playersIds.length)];
 
             let list = words[roomData.config.language][theme];
 
@@ -1386,8 +1383,8 @@ $(document).ready(function()
             gameMode = (mode[0]).id;
         }
 
+        statusRoomList();
         showSection('game-mode');
-
     });
 
     $('#game-mode-btn-new-room').click(function()   
@@ -1472,10 +1469,10 @@ $(document).ready(function()
     {
         const roomId = $('#lobby-room-code').text();
 
-        clearInterval(gameInterval);
-        currentRound = 1;
+        //clearInterval(gameInterval);
+        //currentRound = 1;
 
-        if (window.myLocalId === "p1") 
+        if (window.isHost) 
         {
             const roomRef = window.fbRef(window.fbDB, `rooms/${roomId}`);
 
