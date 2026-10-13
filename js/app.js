@@ -991,7 +991,7 @@ $(document).ready(function()
 
             const playersIds = Object.keys(roomData.players);
 
-            let list = words[roomData.config.language][theme];
+            //let list = words[roomData.config.language][theme];
 
             if (!list) 
             {
@@ -1014,6 +1014,7 @@ $(document).ready(function()
         } 
         catch (error) 
         {
+            console.log(error)
             showFloatingAlert(i18n[currentLang].alert_game_start_error, "danger");
         }
 

@@ -15,7 +15,7 @@
     <title>Wit or Lose</title>
 </head>
 <body>
-    <section id="splash-screen" class="d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
+    <section id="splash-screen" class="d-none flex-column justify-content-between align-items-center w-100 bg-app text-white">
         <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
             <svg id="stage" viewBox="0 0 800 500">
                 <defs>
@@ -342,134 +342,39 @@
         </div>
     </section>
 
-    <section id="game" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
-        <div class="w-100 p-3 d-flex justify-content-between align-items-center bg-black bg-opacity-10 mb-2">
-            <div class="text-start">
-                <span class="small opacity-75 d-block text-uppercase" data-i18n="modal_new_room_label_theme" style="font-size: 0.7rem;">Tema</span>
+    <section id="game" class="d-flex d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
+        <div class="w-100 p-2 d-flex justify-content-between align-items-center bg-black bg-opacity-10 mb-2">
+            <div class="player-info-tier">
+                <div class="player on">
+                    <span class="av p-2">Igor</span>
+                    <span class="player-score pad-score fw-bold">0</span>
+                </div>
                 <span id="game-topic" class="fw-bold text-warning"></span>
             </div>
     
-            <div id="game-timer"
-                class="rounded-circle border border-2 border-warning d-flex align-items-center justify-content-center fw-bold shadow"
-                style="width: 50px; height: 50px; background: rgba(0,0,0,0.2);"> 
-            </div>
-    
-            <div class="text-end">
-                <span class="small opacity-75 d-block text-uppercase" data-i18n="game_label_round" style="font-size: 0.7rem;">Rodada</span>
-                <span id="game-round-display" class="fw-bold">1</span>
+            <div id="game-timer" class="rounded-circle border border-2 border-warning d-flex
+                     align-items-center justify-content-center fw-bold shadow text-end"
+                    style="width: 50px; height: 50px; background: rgba(0,0,0,0.2);">30
             </div>
         </div>
     
         <div class="w-100 flex-grow-1 d-flex flex-column justify-content-start align-items-center px-4 content-wr">
-            <div class="bg-white text-dark rounded-4 p-2 shadow-sm text-center w-100 mb-2 mt-1"
-                style="max-width: 300px; border-bottom: 3px solid #ffc107; transition: all 0.3s ease;">
-                <p class="text-muted mb-0 fw-bold"
-                    data-i18n="game_save_time_title"
-                    style="font-size: 0.6rem;">POUPA-TEMPO:
-                    <span id="save-time-desc" class="fw-bold text-success mb-0"></span>
-                </p>
-            </div>
-
-            <div id="game-card" class="bg-white text-dark rounded-4 p-2 shadow-sm text-center w-100 mb-2"
-                style="max-width: 300px; border-bottom: 3px solid #ffc107; transition: all 0.3s ease;">
-                <p id="desc-word" class="text-muted mb-0 fw-bold"
-                    data-i18n="game_word_title" style="font-size: 0.6rem;">A PALAVRA É:</p>
-                <h4 id="secret-word" data-i18n="game_secret_word" class="fw-bold text-success mb-0"></h4>
-            </div>
-
-            <div id="tips-container" class="row w-100 g-2 text-dark">
-                <div class="col-4">
-                    <div class="bg-white bg-opacity-25 text-white text-center small fw-bold mb-1 rounded">R1</div>
-                    <div id="col-round-1" class="d-flex flex-column gap-1"></div>
+            <div class="stage-card">
+                <div class="game-turn mb-4" id="game-turn-player">Vez de <b>Igor</b></div>
+                <div class="game-word" id="game-word-id">
+                    <button class="tile" data-i="0">b</button>
+                    <button class="tile" data-i="1">a</button>
+                    <button class="tile" data-i="2">k</button>
+                    <button class="tile" data-i="3">e</button>
                 </div>
-                <div class="col-4">
-                    <div class="bg-white bg-opacity-25 text-white text-center small fw-bold mb-1 rounded">R2</div>
-                    <div id="col-round-2" class="d-flex flex-column gap-1"></div>
-                </div>
-                <div class="col-4">
-                    <div class="bg-white bg-opacity-25 text-white text-center small fw-bold mb-1 rounded">R3</div>
-                    <div id="col-round-3" class="d-flex flex-column gap-1"></div>
-                </div>
-            </div>
-
-            <div id="game-voting" class="w-100 mt-2 d-none">
-                <p data-i18n="voting_label_title" class="text-center fw-bold text-warning small mb-2">QUEM É O IMPOSTOR?</p>
-                <div class="list-group shadow-sm">
-                    <div id="voting-list" class="list-group shadow-sm"></div>
-                </div>
-            </div>
-
-            <div id="game-results" class="w-100 mt-4 d-none">
-                <div class="card shadow-lg border-0 animate__animated animate__backInUp">
-                    <div class="card-body text-center p-4">
-            
-                        <h2 id="result-title" class="fw-bold mb-4"></h2>
-            
-                        <hr class="my-4">
-            
-                        <div class="mb-4">
-                            <p data-i18n="result_label_title" 
-                                class="text-muted small mb-1 uppercase tracking-wider">O IMPOSTOR ERA:</p>
-                            <div class="p-3 bg-light rounded-3 border">
-                                <h3 id="result-fake-name" class="fw-bold text-danger mb-0"></h3>
-                            </div>
-                        </div>
-            
-                        <div class="mb-4">
-                            <p data-i18n="result_secret_word_title" 
-                                class="text-muted small mb-1">A PALAVRA SECRETA ERA:</p>
-                            <div class="p-3 bg-light rounded-3 border">
-                                <h3 id="result-word" class="fw-bold text-primary mb-0"></h3>
-                            </div>
-                        </div>
-            
-                        <div id="result-detail" class="alert alert-warning border-0 small mb-4">
-                        </div>
-            
-                        <div class="d-grid gap-2">
-                            <button id="btn-retry-game"
-                                    data-i18n="result_btn_play" 
-                                    class="btn btn-dark btn-lg fw-bold d-none">
-                                JOGAR NOVAMENTE
-                            </button>
-            
-                            <div id="wait-host-lobby"
-                                    data-i18n="result_info_play" 
-                                    class="text-muted d-none">
-                                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
-                                Aguardando o Host reiniciar a sala...
-                            </div>
-                        </div>
-            
-                    </div>
-                </div>
+                <div class="game-info" id="game-info-id">Toque numa letra da palavra para a trocar</div>
             </div>
         </div>
     
-        <div id="game-chat" class="w-100 bg-white p-3 rounded-top-4 shadow-lg">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <div id="game-status-text" class="fw-bold text-dark small" data-i18n="game_started_tip">
-                    O jogo começou! Dê uma pista.
-                </div>
-        
-                <button id="btn-save-time"
-                    class="btn btn-warning btn-sm rounded-circle d-flex align-items-center justify-content-center shadow-sm"
-                    style="width: 35px; height: 35px;">
-                    <i class="bi bi-fast-forward-fill"></i>
-                </button>
-            </div>
-        
-            <div class="overflow-auto mb-2 p-2 text-dark small" style="max-height: 50px; border-top: 1px solid #eee;">
-            </div>
-        
-            <div class="input-group">
-                <input id="game-input-tip" type="text" class="form-control border-success shadow-none"
-                    placeholder="Escreve a tua pista..." data-i18n="input_placeholder_tip">
-                <button id="game-btn-send" 
-                        data-i18n="game_btn_send_title"
-                        class="btn btn-success fw-bold" type="button" data-i18n="btn_send">
-                        ENVIAR
-                </button>
+        <div>
+            <div class="hist-title">Cadeia de palavras</div>
+            <div class="hist" id="game-hist">
+                <span class="w">bake</span>
             </div>
         </div>
     </section>

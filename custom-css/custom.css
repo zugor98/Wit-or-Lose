@@ -3,7 +3,7 @@ body, input, button, textarea, select {
 }
 
 .bg-app {
-    background-color: #16181D;
+    background-color: #16181D !important;
 }
 
 .btn:hover {
@@ -17,7 +17,7 @@ body, input, button, textarea, select {
 
 
 .text-wit {
-    color: #16181D;
+    color: #16181D !important;
 }
 
 .my-x {
@@ -146,4 +146,107 @@ body, input, button, textarea, select {
 .bg-room-leave {
   background-color: #16181D;
   color: #F5A524;
+}
+
+.player-info-tier {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 15rem;
+}
+
+.player.on {
+    color: #16181d;
+    font-size: 20px;
+    background-color: #F5A524;
+}
+
+.player .av {
+    background: #f2e8d5;
+    color: #16181d;
+    place-items: center;
+    font-weight: 700;
+}
+
+.pad-score {
+    padding-left: 0px;
+    padding-right: 8px;
+}
+
+.stage-card {
+    background: #1e2128;
+    border: 1.5px solid #2b2f38;
+    border-radius: 18px;
+    padding: 26px 16px 22px;
+    text-align: center;
+}
+
+.game-turn {
+    font-size: 13px ;
+    color: #8a8f9c;
+    letter-spacing: .06em;
+}
+
+.game-turn b {
+    color: #F5A524;
+}
+
+.game-word {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.tile {
+    width: 64px;
+    height: 76px;
+    border-radius: 10px;
+    background: #f2e8d5;
+    color: #16181d;
+    box-shadow: 0 5px 0 #d9cbae;
+    font-size: 42px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border: 0;
+    transition: transform .12s, background .2s, box-shadow .2s;
+}
+
+.game-info {
+    height: 20px;
+    margin-top: 18px;
+    font-size: 14px;
+    color: #8a8f9c;
+}
+
+.hist-title {
+    font-size: 12px;
+    color: #8a8f9c;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.hist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    font-size: 14px;
+    color: #8a8f9c;
+}
+
+.hist .w {
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: #1e2128;
+    border: 1px solid #2b2f38;
+    text-transform: uppercase;
+}
+
+.hist .arrow {
+    opacity: .5;
 }
