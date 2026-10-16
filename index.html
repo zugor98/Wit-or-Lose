@@ -15,7 +15,7 @@
     <title>Wit or Lose</title>
 </head>
 <body>
-    <section id="splash-screen" class="d-none flex-column justify-content-between align-items-center w-100 bg-app text-white">
+    <section id="splash-screen" class="d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
         <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
             <svg id="stage" viewBox="0 0 800 500">
                 <defs>
@@ -342,7 +342,7 @@
         </div>
     </section>
 
-    <section id="game" class="d-flex d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
+    <section id="game" class="d-none d-flex flex-column justify-content-between align-items-center w-100 bg-app text-white">
         <div class="w-100 p-2 d-flex justify-content-between align-items-center bg-black bg-opacity-10 mb-2">
             <div class="player-info-tier">
                 <div class="player on">
@@ -545,15 +545,13 @@
 
                                 <div class="row mb-4">
                                     <div class="col-8">
-                                        <label data-i18n="label_timer" class="form-label fw-bold small">Distância</label>
+                                        <label data-i18n="label_timer" class="form-label fw-bold small">Dificuldade</label>
                                         <select id="new-run-room-distance"
                                             class="field-gmode shadow form-select form-select-lg shadow-sm">
-                                            <option value="5p">5 Passos</option>
-                                            <option value="10p">10 Passos</option>
-                                            <option value="15p">15 Passos</option>
-                                            <option value="30p">30 Passos</option>
-                                            <option value="50p">50 Passos</option>
-                                            <option value="100p">100 Passos</option>
+                                            <option value="5p">Fácil</option>
+                                            <option value="9p">Médio</option>
+                                            <option value="15p">Difícil</option>
+                                            <option value="20p">Extremo</option>
                                         </select>
                                     </div>
                                 </div>
@@ -654,10 +652,10 @@
                                         <label data-i18n="label_timer" class="form-label fw-bold small">Tempo por turno</label>
                                         <select id="new-survival-room-timer"
                                             class="field-gmode shadow form-select form-select-lg shadow-sm">
-                                            <option value="10s">10 Segundos</option>
-                                            <option value="15s">15 Segundos</option>
-                                            <option value="30s">30 Segundos</option>
-                                            <option value="1m">1 Minuto</option>
+                                            <option value="10">10 Segundos</option>
+                                            <option value="15">15 Segundos</option>
+                                            <option value="30">30 Segundos</option>
+                                            <option value="60">1 Minuto</option>
                                         </select>
                                     </div>
                                 </div>
@@ -691,7 +689,7 @@
                 </div>
                 
                 <div class="text-center modal-footer border-0 pb-4">
-                    <button data-i18n="modal_new_survival_room_create" type="button" id="gmode-btn-confirm-newRoom"
+                    <button data-i18n="modal_new_survival_room_create" type="button" id="gmode-btn-confirm-survival-newRoom"
                         class="wit-btn-gmode btn btn-warning btn-lg w-100 fw-bold shadow">
                         Pronto
                     </button>

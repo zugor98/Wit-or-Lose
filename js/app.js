@@ -16,26 +16,14 @@ $(document).ready(function()
     {
         "pt": 
         {
-            "anime": ["Naruto", "Dragon Ball", "One Piece", "Pokémon", "Death Note", "Attack on Titan", "Demon Slayer", "Fullmetal Alchemist", "Jujutsu Kaisen", "One Punch Man"],
-            "characters": ["Naruto", "Goku", "Luffy", "Vegeta", "Pikachu", "Tanjiro", "Sasuke", "Zoro", "Saitama", "Ash Ketchum"],
-            "animals": ["Cão", "Gato", "Leão", "Elefante", "Girafa", "Cavalo", "Tubarão", "Águia", "Golfinho", "Coelho", "Tigre", "Urso", "Zebra", "Macaco", "Cobra", "Jacaré", "Baleia", "Pinguim", "Lobo", "Raposa", "Canguru", "Hipopótamo", "Rinoceronte", "Vaca", "Porco", "Ovelha", "Galinha", "Pato", "Rato", "Esquilo", "Morcego", "Tartaruga", "Polvo", "Caranguejo", "Formiga", "Abelha", "Borboleta", "Aranha", "Escorpião", "Sapo", "Camaleão", "Papagaio", "Coruja", "Pavão", "Avestruz", "Panda", "Koala", "Pantera", "Hiena", "Guepardo"],
-            "soccer": ["Cristiano Ronaldo", "Lionel Messi", "Neymar", "Kylian Mbappé", "Erling Haaland", "Kevin De Bruyne", "Robert Lewandowski", "Mohamed Salah", "Vinícius Júnior", "Jude Bellingham", "Pelé", "Diego Maradona", "Zinedine Zidane", "Ronaldinho Gaúcho", "Ronaldo Fenómeno", "Johan Cruyff", "Eusébio", "Luís Figo", "David Beckham", "Zico", "Pepe", "Bernardo Silva", "Bruno Fernandes", "Luka Modric", "Karim Benzema", "Manuel Neuer", "Thierry Henry", "Zlatan Ibrahimovic", "Roberto Carlos", "Cafu", "Real Madrid", "FC Barcelona", "Manchester City", "Manchester United", "Liverpool", "Arsenal", "Chelsea", "Bayern Munique", "Borussia Dortmund", "Paris Saint-Germain", "Juventus", "Inter de Milão", "AC Milan", "Benfica", "FC Porto", "Sporting CP", "Flamengo", "Palmeiras", "River Plate", "Boca Juniors", "Ajax", "Napoli", "Atlético de Madrid", "Bayer Leverkusen", "Tottenham", "Al-Nassr", "Inter Miami", "Pep Guardiola", "José Mourinho", "Carlo Ancelotti"],
-            "clash-royale": ["Gigante", "Mago", "P.E.K.K.A", "Tronco", "Mineiro", "Príncipe", "Bárbaros", "Esqueletos", "Goblins", "Montapuercos", "Sparky"],
-            "countries": ["Portugal", "Espanha", "França", "Itália", "Brasil", "Angola", "Inglaterra", "Alemanha", "Japão", "EUA", "Cabo Verde", "Egito", "Ira", "Israel"],
-            "food": ["Bacalhau", "Arroz", "Pizza", "Hambúrguer", "Maçã", "Pão", "Queijo", "Fiambre", "Massa", "Ovo"],
-            "games": ["Minecraft", "Roblox", "Fortnite", "Mario", "Zelda", "Sonic", "GTA", "Tetris", "FIFA", "Pac-Man", "Free-Fire", "Efootball"],
-            "brands": ["Nike", "Apple", "Adidas", "Samsung", "Coca-Cola", "IKEA", "Nespresso", "Zara", "Continente", "Disney", "Xiaomi"],
-            "movies": ["Avatar", "Titanic", "Shrek", "Star Wars", "Harry Potter", "Joker", "Vingadores", "Rei Leão", "Toy Story", "Batman"],
-            "series": ["Stranger Things", "La Casa de Papel", "The Crown", "Friends", "Breaking Bad", "The Office", "Dark", "Elite", "The Witcher", "Squid Game"],
-            "objects": ["Telefone", "Chave", "Relógio", "Óculos", "Caneta", "Carteira", "Candeeiro", "Espelho", "Cadeira", "Garrafa", "Computador", "Televisão", "Comando", "Martelo", "Tesoura", "Faca", "Colher", "Garfo", "Prato", "Copo", "Panela", "Almofada", "Cama", "Mesa", "Sofá", "Mochila", "Guarda-chuva", "Escova de dentes", "Pente", "Toalha", "Sabonete", "Perfume", "Caderno", "Livro", "Borracha", "Lápis", "Tesoura", "Isqueiro", "Lanterna", "Pilha", "Aspirador", "Vassoura", "Balde", "Mala de viagem", "Quadro", "Tapete", "Cortina", "Ventilador", "Sapato", "Chapéu"],
-            "bible": [
-            //personagens
-            "Jesus", "Maria", "Moisés", "Davi", "Golias", "Noé", "Adão", 
-            "Eva", "Sansão", "Dalila", "Abraão", "Salomão", "Pedro", "Daniel", 
-            "Paulo", "Judas", "João Batista",
-            // LUGARES
-            "Jerusalém", "Egito", "Mar Vermelho", "Rio Jordão", "Belém", 
-            "Nazaré", "Jardim do Éden", "Monte Sinai", "Jericó", "Babilônia"]
+            "3L": ["rio","mar","sol","sal","mal","mel","gol","luz","lua","rua","paz","voz","cor","dor","fim","sim","bom","tom","som","dom","asa","boi","sul","pai","mae","pao","cao","rei","lei","uva","ovo","avo","tio","fio","mes","gas"],
+            "4L": ["gato","pato","rato","mato","bola","cola","sola","mola","casa","mesa","rosa","lata","mata","pata","nata","data","fato","dado","medo","modo","todo","tudo","mudo","vela","tela","sala","fala","bala","gala","mala","pano","cano","fino","vila","fila","lado","nada","cara","para","pera","pura","duro","muro","pelo","polo","solo","fogo","logo","lago","cabo","cubo","tubo","bico","pico","rico","vida","lixo","nome","fome","fora","hora","moda","roda","cena","pena","capa","cana","bolo","olho"],
+            "5L": ["porta","carta","corta","morta","torta","forte","morte","sorte","ponte","fonte","monte","ponto","pinta","tinta","ponta","conta","canto","santo","manto","vento","festa","pasta","pista","vista","gosto","posto","pasto","certo","perto","cesto","gesto","barco","banco","carro","carga","larga","barra","terra","serra","ferro","verde","perda","prato","plano","praia","caixa","linha","vinho","mundo","carne","noite","tempo","fruta","livro","amigo"],
+            "6L": ["cidade","escola","janela","camisa","pessoa","minuto","cabelo","barata","tomate","pastel","banana","cavalo","sapato","caneta","pomada","panela","gaveta","tijolo","mesada","pesado","pecado","lavado","casado","bonito","maluco","menina","jantar","grande"],
+            "7L": ["carinho","caminho","formiga","castelo","mochila","cadeira","garrafa","bolacha","estrela","passeio","camarao","coracao","pescoco","farinha","vizinho","sapatos","tomates","palavra","pequeno","crianca","cozinha","esquina","perfume","cerveja","estrada","relogio","alegria","familia","abacaxi","cenoura","caminha","cavalos","meninos"],
+            "8L": ["montanha","pulseira","lanterna","sabonete","carneiro","telefone","hospital","biscoito","banheiro","carteira","universo","paciente","criancas","aventura","natureza","mulheres","trabalho","escritor","aprender","escolher","camiseta","sorvetes"],
+            "9L": ["chocolate","bicicleta","professor","aeroporto","elefantes","borboleta","hospitais","invisivel","navegador","tartaruga","estudante","cachorros","escritora","caminhada","esperanca","lembranca","geladeira","casamento","movimento","automovel"],
+            "10L": ["felicidade","dicionario","pensamento","guardanapo","fotografia","passarinho","computador","passaporte","campeonato","estudantes","sorveteria","hamburguer","biblioteca","ferramenta","capacidade","tecnologia","apartamento","fazendeiro","tempestade","quarentena"]
         },
 
         "en": 
@@ -654,11 +642,8 @@ $(document).ready(function()
                 { 
                     showSection('game');
                     $('#game-topic').text(data.config.themeDesc);
-                    startTimer(60);
+                    startTimer(data.config.params);
                 }
-
-                $('#game-card, #tips-container, #game-chat').removeClass('d-none').show(); 
-                $('#game-results, #game-voting').addClass('d-none').hide();
                 
                 if (window.myLocalId === data.secret.fake) 
                 {
@@ -714,7 +699,7 @@ $(document).ready(function()
         });
     }
 
-    function createRoom(nickname, maxPlayers, language, distance, visibility)
+    function createRoom(nickname, maxPlayers, language, gmode_params, visibility)
     {
         const roomId = Math.random().toString(36).substring(2, 7).toUpperCase();
         const roomRef = window.fbRef(window.fbDB, 'rooms/' + roomId);
@@ -732,7 +717,7 @@ $(document).ready(function()
                 gameModeDesc: gameModeDesc,
                 language: language, 
                 maxPlayers: parseInt(maxPlayers),
-                distance: distance
+                params: gmode_params
             },
             players: 
             { 
@@ -989,24 +974,24 @@ $(document).ready(function()
             
             if (!roomData || !roomData.players) return;
 
-            const playersIds = Object.keys(roomData.players);
-
-            //let list = words[roomData.config.language][theme];
-
-            if (!list) 
+            let list;
+            
+            if((roomData.config.gameMode).includes("run"))
             {
-                const availableThemes = Object.keys(words[roomData.config.language]);
-                const randomTheme = availableThemes[Math.floor(Math.random() * availableThemes.length)];
-                list = words[roomData.config.language][randomTheme];
+                list = Object.keys(words[roomData.config.language][thme])
             }
-
+            else if ((roomData.config.gameMode).includes("survival")) 
+            {
+                list = Object.keys(words[roomData.config.language]);
+                const randomWord = list[Math.floor(Math.random() * list.length)];
+                list = words[roomData.config.language][randomWord];
+            }
+                
             const wordDrawn = list[Math.floor(Math.random() * list.length)];
-
             await window.fbUpdate(roomRef, 
             {
                 status: "playing",
-                currentRound: 1,
-                secret: { word: wordDrawn, fake: fakeId }
+                secret: { word: wordDrawn }
             });
             
             showFloatingAlert(i18n[currentLang].alert_game_started, "info");
@@ -1014,7 +999,6 @@ $(document).ready(function()
         } 
         catch (error) 
         {
-            console.log(error)
             showFloatingAlert(i18n[currentLang].alert_game_start_error, "danger");
         }
 
@@ -1435,14 +1419,14 @@ $(document).ready(function()
 
     $('#gmode-btn-confirm-survival-newRoom').click(function() 
     {
-        const maxPlayers = $('#new-survival-room-max').val();
-        const language = $('#new-survival-room-lang').val();
-        const themeDesc = $('#new-survival-room-theme option:selected').text();
-        const visibility = $('input[name="roomVisibility"]:checked').val();
+        const maxPlayers = $('#new-run-room-max').val();
+        let language = $('#new-run-room-lang').val();
+        const timer = $('#new-survival-room-timer').val();
+        const visibility = $('input[name="run-roomVisibility"]:checked').val();
 
         bootstrap.Modal.getInstance(document.getElementById('new-survival-room-modal')).hide();
 
-        createRoom(name, visibility, maxPlayers, language, themeDesc, theme);
+        createRoom(nickname, maxPlayers, language, timer, visibility);
     });
 
     $('#home-btn-rooms').click(function() 
